@@ -18,7 +18,7 @@ def is_password_similar_to_username(password, username):
 def register(request):
     if request.method == 'GET':    
         if request.user.is_authenticated:
-            return render(request, '/')
+            return render(request, 'dashboard/index.html')
         return render(request, 'users/register.html')
     
     elif request.method == 'POST':
@@ -64,7 +64,7 @@ def register(request):
 def login(request):
     if request.method == "GET":
         if request.user.is_authenticated:
-            return render(request, '/')
+            return render(request, 'dashboard/index.html')
         return render(request, 'users/login.html')
     
     elif request.method == "POST":
