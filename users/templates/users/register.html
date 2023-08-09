@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block 'title' %}
-Login
+Registro
 {% endblock %}
 
 
@@ -21,7 +21,7 @@ Login
                                 <ul class="messages">
                                     {% for message in messages %}
                                     <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
-                                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Importante: {% endif %}
                                         {{ message }}
                                         </li>
                                         {% endfor %}
@@ -66,6 +66,7 @@ Login
 
 
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <a href="{% url 'login' %}">Já tem uma conta?</a>
                                         <button type="submit" class="btn btn-primary btn-lg">Registrar</button>
                                     </div>
 
