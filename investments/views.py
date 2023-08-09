@@ -20,3 +20,12 @@ def investment(request):
 def new_investment(request):
     return render(request, 'investiments/new_investment.html')
 
+
+def detail_investment(request, id):
+    detail = Investment.objects.get(id=id)
+
+    context = {
+        "detail": detail
+    }
+
+    return render(request, 'investments/detail_investment.html', context)
