@@ -17,6 +17,8 @@ def is_password_similar_to_username(password, username):
 
 def register(request):
     if request.method == 'GET':    
+        if request.user.is_authenticated:
+            return render(request, '/')
         return render(request, 'users/register.html')
     
     elif request.method == 'POST':
@@ -25,7 +27,6 @@ def register(request):
         password = request.POST.get('password')
         confirm_password = request.POST.get('confirm_password')
 
-        # TODO: validações 
         if (len(name.strip()) == 0) or (len(email.strip()) == 0) or (len(password.strip()) == 0) or (len(confirm_password.strip()) == 0):
             messages.add_message(request, constants.ERROR, "Todos os campos devem ser preenchidos")
             return redirect('/auth/register')
@@ -39,10 +40,10 @@ def register(request):
             messages.add_message(request, constants.ERROR, "A senha é muito semelhante ao nome de usuário")
             return redirect('/auth/register')
         
-        user = User.objects.filter(email=email)
+        user = User.objects.filter(username=name)
 
         if user.exists():
-            messages.add_message(request, constants.ERROR, "O email já existe")
+            messages.add_message(request, constants.ERROR, "Usuário já existe")
             return redirect('/auth/register')
         
         else:
@@ -51,7 +52,7 @@ def register(request):
                 
                 user.save()
                 messages.add_message(request, constants.SUCCESS, "Usuário cadastrado com sucesso")
-                return redirect('/auth/register')
+                return redirect('/auth/login')
             
             except:
                 messages.add_message(request, constants.ERROR, "Erro interno do sistema")
@@ -61,4 +62,29 @@ def register(request):
 
 
 def login(request):
-    return render(request, 'users/login.html')
+    if request.method == "GET":
+        if request.user.is_authenticated:
+            return render(request, '/')
+        return render(request, 'users/login.html')
+    
+    elif request.method == "POST":
+        name = request.POST.get('name')
+        password = request.POST.get('password')
+
+        if (len(name.strip()) == 0) or (len(password.strip()) == 0):
+            messages.add_message(request, constants.ERROR, "Todos os campos devem ser preenchidos")
+            return redirect('/auth/login')
+        
+        user = auth.authenticate(username=name, password=password)
+
+        if not user:
+            messages.add_message(request, constants.ERROR, "Email ou senha inválidos")
+            return redirect('/auth/login')
+        
+        else:
+            auth.login(request, user)
+            return render(request, 'dashboard/index.html')
+        
+def logout(request):
+    auth.logout(request)
+    return redirect('/auth/login')
