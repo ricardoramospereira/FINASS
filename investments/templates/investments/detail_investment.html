@@ -1,3 +1,29 @@
-<h1>{{detail.id}}</h1>
-<h1>{{detail.name}}</h1>
-<h1>{{detail.status}}</h1>
+{% extends 'global/base.html' %}
+
+
+{% block 'content' %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            Detalhe do Investimento
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ detail.name }}</h5>
+            <p class="card-text"><strong>ID:</strong> {{ detail.id }}</p>
+            <p class="card-text"><strong>Status:</strong> {{ detail.status }}</p>
+            <p class="card-text"><strong>Descrição:</strong> {{ detail.description }}</p>
+            <!-- Adicione mais campos aqui conforme necessário -->
+        </div>
+    </div>
+
+    <a href="{% url 'investment' %}"><button type="button" class="btn btn-light">Voltar</button></a>
+</div>
+
+
+
+
+
+
+
+
+{% endblock %}

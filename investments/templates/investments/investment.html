@@ -26,7 +26,7 @@
         
       <thead>
         <tr class="bg-light">
-          <th scope="col" width="5%"><input class="form-check-input" type="checkbox"></th>
+      
           <th scope="col" width="5%">ID</th>
           <th scope="col" width="20%">Nome</th>
           <th scope="col" width="20%">Date</th>
@@ -37,23 +37,47 @@
           <th></th>
         </tr>
       </thead>
-  <tbody>
-    {% for invest in investment %}
-    <tr>
-      <th scope="row"><input class="form-check-input" type="checkbox"></th>
-      <td>{{ invest.id }}</td>
-      <td>{{ invest.name }}</td>
-      <td><i class="fa fa-check-circle-o green"></i><span class="ms-1">{{ invest.date }}</span></td>
-      <td><img src="https://i.imgur.com/VKOeFyS.png" width="25">{{ invest.status }}</td>
-      <td>Wirecard for figma</td>
-      <td class="text-end"><span class="fw-bolder">R${{ invest.value }}</span> <i class="fa fa-ellipsis-h  ms-2"></i></td>
-      <td><a href="{% url 'detail_investment' invest.id %}"><button type="button" class="btn btn-primary">Ver</button></a></td>
-      <td><button type="button" class="btn btn-warning">Editar</button></td>
-      <td><button type="button" class="btn btn-danger">Excluir</button></td>
+      <tbody>
+        {% for invest in investment %}
+        <tr>
+          <td>{{ invest.id }}</td>
+          <td>{{ invest.name }}</td>
+          <td><i class="fa fa-check-circle-o green"></i><span class="ms-1">{{ invest.date }}</span></td>
+          <td><img src="https://i.imgur.com/VKOeFyS.png" width="25">{{ invest.status }}</td>
+          <td>Wirecard for figma</td>
+          <td class="text-end"><span class="fw-bolder">R${{ invest.value }}</span> <i class="fa fa-ellipsis-h  ms-2"></i></td>
+          <td><a href="{% url 'detail_investment' invest.id %}"><button type="button" class="btn btn-primary">Ver</button></a></td>
+          <td><button type="button" class="btn btn-warning">Editar</button></td>
+          <td>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+              Excluir
+            </button>
+          </td>
+        </tr>
       
-    </tr>
-    {% endfor %}
-  </tbody>
+        <!-- Modal de confirmação para exclusão -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirmar Exclusão</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+              </div>
+              <div class="modal-body">
+                Tem certeza de que deseja excluir o investimento '{{ invest.name }}'?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <a href="#">
+                  <button type="button" class="btn btn-danger">Excluir</button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </tbody>
+      
 </table>
   
   </div>
