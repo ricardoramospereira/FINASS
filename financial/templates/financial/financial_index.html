@@ -1,0 +1,80 @@
+{% extends 'financial/base_finantial.html' %}
+{% load static %}
+
+{% block 'context' %}
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Saldo</h5>
+            <i class="fa-solid fa-arrow-up"></i>
+            <p class="card-text">Seu saldo atual</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Despesas</h5>
+            <i class="fa-solid fa-arrow-down"></i>
+            <p class="card-text">Suas despesas recentes</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Saldo Total</h5>
+            <p class="card-text">Seu saldo total com todas as contas</p>
+            <a href="#" class="btn btn-primary">Gerenciar Contas</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Planejamento</h5>
+            <a href="#" class="btn btn-primary">Definir Planejamento</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Saldo Mensal</h5>
+            <p class="card-text">Seu saldo mensal atual</p>
+            <p class="card-text">Despesa Mensal Total</p>
+            <a href="#" class="btn btn-primary">Gerenciar Dados Mensais</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Equilíbrio Financeiro</h5>
+            <p class="card-text">Porcentagem de Gastos Essenciais e Não Essenciais</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Gerenciar Contas</h5>
+            <p class="card-text">Próximas contas a vencer</p>
+            <p class="card-text">Contas vencidas</p>
+            <a href="#" class="btn btn-primary">Ver Mais</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
+{% endblock %}
