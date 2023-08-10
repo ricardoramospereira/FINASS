@@ -1,11 +1,23 @@
-<form action="" method="POST">{% csrf_token %}
+{% extends 'global/base.html' %}
+{% load crispy_forms_tags %}
 
+{% block 'content' %}
+
+<div class="container">
     <h1>Formulário</h1>
-    {{ form }}
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        <strong>Erro:</strong> Por favor, corrija os erros abaixo.
+    </div>
+    {% endif %}
+    <form action="" method="POST">{% csrf_token %}
 
-    <label for="">Tipo de Investimento</label>
-    
-    <a href="{% url 'investment' %}" class="btn btn-outline-danger">Cancelar</a>
-    <button type="submit" class="btn btn-warning">Editar</button>
+        {{ form | crispy }}
 
-</form>
+
+        <a href="{% url 'investment' %}" class="btn btn-outline-danger">Cancelar</a>
+        <button type="submit" class="btn btn-success">Salvar</button>
+
+    </form>
+</div>
+{% endblock %}

@@ -2,20 +2,24 @@
 
 
 {% block 'content' %}
-<div class="container mt-5">
-    <div class="card">
-        <div class="card-header">
-            Detalhe do Investimento
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">{{ detail.name }}</h5>
-            <p class="card-text"><strong>ID:</strong> {{ detail.id }}</p>
-            <p class="card-text"><strong>Status:</strong> {{ detail.status }}</p>
-            <p class="card-text"><strong>Descrição:</strong> {{ detail.description }}</p>
-            <!-- Adicione mais campos aqui conforme necessário -->
-        </div>
-    </div>
+<h1 style="text-align: center;">Detalhes do Investimento</h1>
+<div class="container">
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Valor</th>
+            <th>Pago</th>
+        </tr>
+        <tr>
+            <td>{{ detail.id }}</td>
+            <td>{{ detail.name }}</td>
+            <td>{{ detail.value }}</td>
+            <td>{{ detail.status }}</td>
+        </tr>
+    </table>
 
-    <a href="{% url 'investment' %}"><button type="button" class="btn btn-light">Voltar</button></a>
+    <a href="{% url 'investment' %}"><button type="button" class="btn btn-secondary">Voltar</button></a>
 </div>
+
 {% endblock %}

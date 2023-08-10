@@ -44,20 +44,20 @@
           <td>{{ invest.name }}</td>
           <td><i class="fa fa-check-circle-o green"></i><span class="ms-1">{{ invest.date }}</span></td>
           <td>
-            <input type="checkbox" {% if invest.status %}checked{% endif %}>
+            <input type="checkbox" {% if invest.status %}checked{% endif %} disabled>
           </td>          
           <td class="text-end"><span class="fw-bolder">R${{ invest.value }}</span> <i class="fa fa-ellipsis-h  ms-2"></i></td>
           <td><a href="{% url 'detail_investment' invest.id %}"><button type="button" class="btn btn-primary">Ver</button></a></td>
           <td><a href="{% url 'edit' invest.id %}"><button type="button" class="btn btn-warning">Editar</button></a></td>
           <td>
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ invest.id }}">
               Excluir
             </button>
           </td>
         </tr>
       
         <!-- Modal de confirmação para exclusão -->
-        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal fade" id="deleteModal{{ invest.id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ invest.id }}" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -65,11 +65,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
               </div>
               <div class="modal-body">
-                Tem certeza de que deseja excluir o investimento '{{ invest.name }}'?
+                Tem certeza de que deseja excluir o investimento {{ invest.name }}?
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <a href="#">
+                <a href="{% url 'delete' invest.id %}">
                   <button type="button" class="btn btn-danger">Excluir</button>
                 </a>
               </div>
