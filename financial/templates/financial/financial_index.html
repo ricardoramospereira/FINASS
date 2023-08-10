@@ -3,78 +3,105 @@
 
 {% block 'context' %}
 <div class="container mt-5">
-    <div class="row">
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Saldo</h5>
-            <i class="fa-solid fa-arrow-up"></i>
-            <p class="card-text">Seu saldo atual</p>
-          </div>
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Saldo</h5>
+          <i class="fa-solid fa-arrow-up"></i>
+          <p class="card-text" style="color: green;">R$200.00</p>
         </div>
       </div>
-
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Despesas</h5>
-            <i class="fa-solid fa-arrow-down"></i>
-            <p class="card-text">Suas despesas recentes</p>
-          </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Despesas</h5>
+          <i class="fa-solid fa-arrow-down"></i>
+          <p class="card-text" style="color: red;">R$200.00</p>
         </div>
       </div>
-
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Saldo Total</h5>
-            <p class="card-text">Seu saldo total com todas as contas</p>
-            <a href="#" class="btn btn-primary">Gerenciar Contas</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Planejamento</h5>
-            <a href="#" class="btn btn-primary">Definir Planejamento</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Saldo Mensal</h5>
-            <p class="card-text">Seu saldo mensal atual</p>
-            <p class="card-text">Despesa Mensal Total</p>
-            <a href="#" class="btn btn-primary">Gerenciar Dados Mensais</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Equilíbrio Financeiro</h5>
-            <p class="card-text">Porcentagem de Gastos Essenciais e Não Essenciais</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Gerenciar Contas</h5>
-            <p class="card-text">Próximas contas a vencer</p>
-            <p class="card-text">Contas vencidas</p>
-            <a href="#" class="btn btn-primary">Ver Mais</a>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Saldo Total</h5>
+          <i class="fa-solid fa-landmark"></i>
+          <div class="bg-light p-3 mt-3">
+            <p class="mb-0"><strong></strong>Bradesco</p>
+            <p class="mb-0"><strong></strong> R$ 10,000</p>
+          </div>
+          <a href="{% url 'manage_financial' %}"><button class="btn btn-primary">Gerenciar Contas</button></a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Planejamento</h5>
+          <i class="fa-solid fa-hand-holding-dollar"></i>
+          <br>
+          <br>
+          <button class="btn btn-primary">Definir Planejamento</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card">
+          <div class="card-body">
+              <h5 class="card-title">Dados Mensais</h5>
+              <i class="fa-solid fa-chart-pie" style="font-size: 24px;"></i>
+              
+              <hr>
+              
+              <p style="color: green;"><strong>Receita Mensal:</strong> R$ 5,000</p>
+              <p style="color: red;"><strong>Despesa Mensal:</strong> R$ 3,000</p>
+              <p style="color: red;"><strong>Saldo Total Disponível:</strong>- R$ 2,000</p>
+              
+              <button class="btn btn-primary mt-3">Gerenciar Dados Mensais</button>
+          </div>
+      </div>
+  </div>
   
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="card">
+          <div class="card-body bg-light">
+              <h5 class="card-title">Gerenciar Contas</h5>
+              <i class="fa-solid fa-money-bill-trend-up"></i>
+              <div class="mt-3">
+                  <p><strong>Próximas do Vencimento:</strong> 3 contas</p>
+                  <p style="color: red;"><strong>Vencidas:</strong> 2 contas</p>
+              </div>
+              <button class="btn btn-primary">Ver Mais</button>
+          </div>
+      </div>
+  </div>
+  
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Equilíbrio Financeiro</h5>
+          <i class="fa-solid fa-scale-balanced"></i>
+          <br>
+          Essênciais
+          <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="75"
+              aria-valuemin="0" aria-valuemax="100">75%</div>
+          </div>
+          Não Essênciais
+          <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="75"
+              aria-valuemin="0" aria-valuemax="100">75%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
