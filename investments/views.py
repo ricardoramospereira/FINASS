@@ -44,3 +44,18 @@ def detail_investment(request, id):
     }
 
     return render(request, 'investments/detail_investment.html', context)
+
+def edit(request, id):
+    investment = Investment.objects.get(id=id)
+
+    if request.method == "GET":
+        form = InvestmentForm(instance=investment)
+        return render(request, 'investments/new_investment.html', {'form': form})
+
+    else:
+        form = InvestmentForm(request.POST, instance=investment)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, constants.SUCCESS, 'Investimento atualizado com sucesso')
+        return redirect('investment')
+
