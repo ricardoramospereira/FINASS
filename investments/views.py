@@ -59,3 +59,11 @@ def edit(request, id):
             messages.add_message(request, constants.SUCCESS, 'Investimento atualizado com sucesso')
         return redirect('investment')
 
+def delete(request, id):
+    investment = Investment.objects.get(id=id)
+    investment.delete()
+    messages.add_message(request, constants.SUCCESS, 'Investimento excluido com sucesso')
+    return redirect('investment')
+
+        
+    
