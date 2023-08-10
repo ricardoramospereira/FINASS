@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Investment
+from .forms import InvestmentForm
+from django.contrib import messages
+from django.contrib.messages import constants
 
 # Create your views here.
 def investment(request):
@@ -18,7 +21,19 @@ def investment(request):
 
 
 def new_investment(request):
-    return render(request, 'investiments/new_investment.html')
+    if request.method == "POST":
+        investment_form = InvestmentForm(request.POST) 
+        if investment_form.is_valid():
+            investment_form.save()
+            messages.add_message(request, constants.SUCCESS, "Investimento cadastrado com sucesso.")
+        return redirect('investment')
+    
+    else:
+        investment_form = InvestmentForm()
+        form = {
+            'form': investment_form
+        }
+        return render(request, 'investments/new_investment.html', context=form)
 
 
 def detail_investment(request, id):
@@ -29,3 +44,18 @@ def detail_investment(request, id):
     }
 
     return render(request, 'investments/detail_investment.html', context)
+
+def edit(request, id):
+    investment = Investment.objects.get(id=id)
+
+    if request.method == "GET":
+        form = InvestmentForm(instance=investment)
+        return render(request, 'investments/new_investment.html', {'form': form})
+
+    else:
+        form = InvestmentForm(request.POST, instance=investment)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, constants.SUCCESS, 'Investimento atualizado com sucesso')
+        return redirect('investment')
+

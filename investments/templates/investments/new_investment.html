@@ -1,7 +1,11 @@
-<form action="{% url 'investment' %}" method="POST">{% csrf_token %}
+<form action="" method="POST">{% csrf_token %}
+
+    <h1>Formulário</h1>
+    {{ form }}
 
     <label for="">Tipo de Investimento</label>
-    <input type="text" name="TipoInvestimento">
-    <button type="submit">Salvar</button>
+    
+    <a href="{% url 'investment' %}" class="btn btn-outline-danger">Cancelar</a>
+    <button type="submit" class="btn btn-warning">Editar</button>
 
 </form>

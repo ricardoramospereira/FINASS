@@ -18,6 +18,7 @@
             <span class="position-absolute search"><i class="fa fa-search"></i></span>
             <input class="form-control w-100" placeholder="pesquisar...">
         </div>
+        <a href="{% url 'new_investment' %}" class="btn btn-outline-primary">Novo investimento</a>
         
         
     </div>
@@ -30,9 +31,8 @@
           <th scope="col" width="5%">ID</th>
           <th scope="col" width="20%">Nome</th>
           <th scope="col" width="20%">Date</th>
-          <th scope="col" width="10%">Status</th>
-          <th scope="col" width="20%">Valor</th>
-          <th scope="col" class="text-end" width="20%"><span>Revenue</span></th>
+          <th scope="col" width="10%">Pago</th>
+          <th scope="col" class="text-end" width="20%"><span>Valor</span></th>
           <th></th>
           <th></th>
         </tr>
@@ -43,11 +43,12 @@
           <td>{{ invest.id }}</td>
           <td>{{ invest.name }}</td>
           <td><i class="fa fa-check-circle-o green"></i><span class="ms-1">{{ invest.date }}</span></td>
-          <td><img src="https://i.imgur.com/VKOeFyS.png" width="25">{{ invest.status }}</td>
-          <td>Wirecard for figma</td>
+          <td>
+            <input type="checkbox" {% if invest.status %}checked{% endif %}>
+          </td>          
           <td class="text-end"><span class="fw-bolder">R${{ invest.value }}</span> <i class="fa fa-ellipsis-h  ms-2"></i></td>
           <td><a href="{% url 'detail_investment' invest.id %}"><button type="button" class="btn btn-primary">Ver</button></a></td>
-          <td><button type="button" class="btn btn-warning">Editar</button></td>
+          <td><a href="{% url 'edit' invest.id %}"><button type="button" class="btn btn-warning">Editar</button></a></td>
           <td>
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
               Excluir
@@ -82,6 +83,16 @@
   
   </div>
   <a href="{% url 'index' %}"><button type="button" class="btn btn-light">Voltar</button></a>
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+          {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Importante: {% endif %}
+          {{ message }}
+          </li>
+          {% endfor %}
+  </ul>
+  {% endif %}
     
 </div>
 {% endblock %}
