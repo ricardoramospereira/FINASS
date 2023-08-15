@@ -10,7 +10,7 @@ from django.core.paginator import Paginator, Page
 def financial_index(request):
     accounts = Account.objects.all()
 
-    paginator = Paginator(accounts, 5)
+    paginator = Paginator(accounts, 3)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
