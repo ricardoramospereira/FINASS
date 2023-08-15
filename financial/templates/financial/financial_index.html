@@ -24,20 +24,41 @@
     </div>
   </div>
   <div class="row">
+
     <div class="col-md-4 mb-4">
       <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Saldo Total</h5>
-          <i class="fa-solid fa-landmark"></i>
-          <div class="bg-light p-3 mt-3">
-            <p class="mb-0"><strong></strong>Bradesco</p>
-            <p class="mb-0"><strong></strong> R$ 10,000</p>
+          <div class="card-body">
+              <h5 class="card-title">Saldo Total</h5>
+              <i class="fa-solid fa-landmark"></i>
+              {% for account in page_obj %} {# Use page_obj em vez de accounts #}
+              <div class="bg-light p-3 mt-3">
+                  <p class="mb-0"><strong>Banco:</strong> {{ account.get_bank_display }}</p>
+                  <p class="mb-0"><strong>Valor:</strong> R$ {{ account.value }}</p>
+              </div>
+              {% endfor %}
+              <div class="pagination">
+                  <span class="step-links">
+                      {% if page_obj.has_previous %}
+                      <a href="?page=1">&laquo; Voltar</a>
+                      <a href="?page={{ page_obj.previous_page_number }}">próxima</a>
+                      {% endif %}
+                      <span class="current">
+                          Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                      </span>
+                      {% if page_obj.has_next %}
+                      <a href="?page={{ page_obj.next_page_number }}">Voltar</a>
+                      <a href="?page={{ page_obj.paginator.num_pages }}">Próxima &raquo;</a>
+                      {% endif %}
+                  </span>
+              </div>
+              <div class="mb-3">
+                  <strong>Total dos valores dos bancos:</strong> R$ {{ total_balance }}
+              </div>
+              <a href="{% url 'manage_financial' %}"><button class="btn btn-primary">Gerenciar Contas</button></a>
           </div>
-          <a href="{% url 'manage_financial' %}"><button class="btn btn-primary">Gerenciar Contas</button></a>
-        </div>
-
       </div>
-    </div>
+  </div>
+  
 
     <div class="col-md-4 mb-4">
       <div class="card">
@@ -52,37 +73,37 @@
     </div>
     <div class="col-md-4 mb-4">
       <div class="card">
-          <div class="card-body">
-              <h5 class="card-title">Dados Mensais</h5>
-              <i class="fa-solid fa-chart-pie" style="font-size: 24px;"></i>
-              
-              <hr>
-              
-              <p style="color: green;"><strong>Receita Mensal:</strong> R$ 5,000</p>
-              <p style="color: red;"><strong>Despesa Mensal:</strong> R$ 3,000</p>
-              <p style="color: red;"><strong>Saldo Total Disponível:</strong>- R$ 2,000</p>
-              
-              <button class="btn btn-primary mt-3">Gerenciar Dados Mensais</button>
-          </div>
+        <div class="card-body">
+          <h5 class="card-title">Dados Mensais</h5>
+          <i class="fa-solid fa-chart-pie" style="font-size: 24px;"></i>
+
+          <hr>
+
+          <p style="color: green;"><strong>Receita Mensal:</strong> R$ 5,000</p>
+          <p style="color: red;"><strong>Despesa Mensal:</strong> R$ 3,000</p>
+          <p style="color: red;"><strong>Saldo Total Disponível:</strong>- R$ 2,000</p>
+
+          <button class="btn btn-primary mt-3">Gerenciar Dados Mensais</button>
+        </div>
       </div>
-  </div>
-  
+    </div>
+
   </div>
   <div class="row">
     <div class="col-md-6 mb-4">
       <div class="card">
-          <div class="card-body bg-light">
-              <h5 class="card-title">Gerenciar Contas</h5>
-              <i class="fa-solid fa-money-bill-trend-up"></i>
-              <div class="mt-3">
-                  <p><strong>Próximas do Vencimento:</strong> 3 contas</p>
-                  <p style="color: red;"><strong>Vencidas:</strong> 2 contas</p>
-              </div>
-              <button class="btn btn-primary">Ver Mais</button>
+        <div class="card-body bg-light">
+          <h5 class="card-title">Gerenciar Contas</h5>
+          <i class="fa-solid fa-money-bill-trend-up"></i>
+          <div class="mt-3">
+            <p><strong>Próximas do Vencimento:</strong> 3 contas</p>
+            <p style="color: red;"><strong>Vencidas:</strong> 2 contas</p>
           </div>
+          <button class="btn btn-primary">Ver Mais</button>
+        </div>
       </div>
-  </div>
-  
+    </div>
+
     <div class="col-md-6 mb-4">
       <div class="card">
         <div class="card-body">

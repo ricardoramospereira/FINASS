@@ -8,24 +8,40 @@
 {% endblock %}
 
 {% block 'context' %}
+
 <body>
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-6">
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Importante: {% endif %}
+                        {{ message }}
+                        </li>
+                        {% endfor %}
+                </ul>
+                {% endif %}
                 <div class="card">
                     <div class="card-header">
                         Suas Contas
                     </div>
                     <div class="card-body">
                         <!-- List of accounts from database -->
-                        <div class="account">
+                        <div class="account d-flex justify-content-between">
                             <h5>Nome do Banco: Banco A</h5>
-                            <p>Saldo: R$ 1000.00</p>
+                            <a href="#"><i class="fas fa-trash-alt"></i></a>
                         </div>
-                        <div class="account">
+                        <p>Saldo: R$ 1000.00</p>
+
+
+                        <div class="account d-flex justify-content-between">
                             <h5>Nome do Banco: Banco B</h5>
-                            <p>Saldo: R$ 1500.00</p>
+                            <a href="#"><i class="fas fa-trash-alt"></i></a>
                         </div>
+                        <p>Saldo: R$ 1000.00</p>
+
                         <!-- Total balance -->
                         <p>Total: R$ 2500.00</p>
                     </div>
@@ -37,29 +53,34 @@
                         Nova Conta
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form action="{% url 'register_bank' %}" method="POST">{% csrf_token %}
                             <div class="mb-3">
                                 <label for="bankSelect" class="form-label">Banco</label>
-                                <select class="form-select" id="bankSelect">
-                                    <!-- Options loaded from database -->
-                                    <option value="banco_a">Banco A</option>
-                                    <option value="banco_b">Banco B</option>
+                                <select class="form-select" id="bankSelect" name="bank">
+                                    <option value="">----</option> <!-- Option for empty selection -->
+                                    <!-- Options loaded from BANK_CHOICES -->
+                                    {% for choice in account.model.BANK_CHOICES %}
+                                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
+
                             <div class="mb-3">
                                 <label for="typeSelect" class="form-label">Tipo</label>
-                                <select class="form-select" id="typeSelect">
-                                    <option value="type1">Tipo 1</option>
-                                    <option value="type2">Tipo 2</option>
+                                <select class="form-select" id="typeSelect" name="type">
+                                    <option value="">----</option> <!-- Option for empty selection -->
+                                    <!-- Options loaded from ACCOUNT_TYPE -->
+                                    {% for choice in account.model.ACCOUNT_TYPE %}
+                                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
+
+
                             <div class="mb-3">
                                 <label for="valueInput" class="form-label">Valor</label>
-                                <input type="text" class="form-control" id="valueInput">
-                            </div>
-                            <div class="mb-3">
-                                <label for="iconInput" class="form-label">Ícone</label>
-                                <input type="text" class="form-control" id="iconInput">
+
+                                <input name="value" type="text" class="form-control" id="valueInput">
                             </div>
                             <button type="submit" class="btn btn-primary">Adicionar</button>
                         </form>
@@ -82,11 +103,11 @@
                             <button type="submit" class="btn btn-primary">Adicionar</button>
                         </form>
                     </div>
-                    
+
                 </div>
-               
+
             </div>
-            
+
         </div>
         <a href="{% url 'financial_index' %}"><button type="button" class="btn btn-light">Voltar</button></a>
         <div class="row mt-3">
@@ -105,4 +126,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
+    {% endblock %}
