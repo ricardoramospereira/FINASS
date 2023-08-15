@@ -8,101 +8,101 @@
 {% endblock %}
 
 {% block 'context' %}
-<br>
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col-md-5">
-            <p class="fonte-destaque">Suas contas</p>
-            <hr>
-
-            <div class="contas">
-
-
-                <div class="lista-contas-main">
-                    <span><img width="10%" src="#">&nbsp&nbspNubank</span>
-
-                    <span class="total-conta positivo ">R$ 1.800,00&nbsp&nbsp&nbsp <a href="#"><img
-                                src="{% static 'perfil/img/exit.png' %}"></a></span>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Suas Contas
+                    </div>
+                    <div class="card-body">
+                        <!-- List of accounts from database -->
+                        <div class="account">
+                            <h5>Nome do Banco: Banco A</h5>
+                            <p>Saldo: R$ 1000.00</p>
+                        </div>
+                        <div class="account">
+                            <h5>Nome do Banco: Banco B</h5>
+                            <p>Saldo: R$ 1500.00</p>
+                        </div>
+                        <!-- Total balance -->
+                        <p>Total: R$ 2500.00</p>
+                    </div>
                 </div>
-                <br>
-
-
             </div>
-
-            <hr>
-            <span class="fonte-destaque">Total:</span>
-            <span class="positivo total-conta font-destaque">R$ 1.800,00</span>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Nova Conta
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="bankSelect" class="form-label">Banco</label>
+                                <select class="form-select" id="bankSelect">
+                                    <!-- Options loaded from database -->
+                                    <option value="banco_a">Banco A</option>
+                                    <option value="banco_b">Banco B</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="typeSelect" class="form-label">Tipo</label>
+                                <select class="form-select" id="typeSelect">
+                                    <option value="type1">Tipo 1</option>
+                                    <option value="type2">Tipo 2</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="valueInput" class="form-label">Valor</label>
+                                <input type="text" class="form-control" id="valueInput">
+                            </div>
+                            <div class="mb-3">
+                                <label for="iconInput" class="form-label">Ícone</label>
+                                <input type="text" class="form-control" id="iconInput">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Adicionar</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-header">
+                        Nova Categoria
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="categoryInput" class="form-label">Categoria</label>
+                                <input type="text" class="form-control" id="categoryInput">
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="essentialCheck">
+                                <label class="form-check-label" for="essentialCheck">Essencial</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Adicionar</button>
+                        </form>
+                    </div>
+                    
+                </div>
+               
+            </div>
+            
         </div>
-
-        <div class="col-md-2"></div>
-
-        <div class="col-md-5">
-            <p class="fonte-destaque">Nova conta</p>
-
-            <form action="" method="POST">
-                <label>Apelido</label>
-                <input type="text" name="apelido" class="form-control" placeholder="">
-                <br>
-                <label>Banco</label>
-                <select name="banco" class="form-select">
-                    <option value="NU">Nubank</option>
-                </select>
-                <br>
-                <label>Tipo</label>
-                <select name="tipo" class="form-select">
-                    <option value="pf">Pessoa física</option>
-                    <option value="pj">Pessoa jurídica</option>
-                </select>
-                <br>
-                <label>Valor</label>
-                <input type="number" name="valor" class="form-control" placeholder="">
-                <br>
-                <input type="file" placeholder="Ícone" name="icone">
-                <br>
-                <br>
-                <input style="width: 100%" type="submit" class="botao-principal">
-            </form>
+        <a href="{% url 'financial_index' %}"><button type="button" class="btn btn-light">Voltar</button></a>
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Categorias Cadastradas
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Categoria 1 (Essencial)</li>
+                            <li>Categoria 2</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <hr>
-
-    <div class="row">
-        <div class="col-md-5">
-            <span class="fonte-destaque">Nova categoria</span>
-
-            <form action="" method="POST">
-                <label>Categoria</label>
-                <input type="text" name="categoria" class="form-control">
-                <br>
-
-                <input type="checkbox" name="essencial" value="essencial"><label class="positivo">&nbspEssencial</label>
-                <br>
-                <br>
-                <input style="width: 100%" type="submit" class="botao-principal" value="Adicionar">
-            </form>
-        </div>
-
-        <div class="col-md-2">
-        </div>
-
-        <div class="col-md-5">
-            <span class="fonte-destaque">Suas categoria</span>
-            <br>
-            <div class="contas">
-
-
-                <div class="lista-contas-main">
-                    <span>Lazer</span>
-
-                    <span class="total-conta"><a href="#"><img src="#"></a></span>
-                </div>
-                <br>
-
-
-            </div>
-        </div>
-    </div>
-</div>
 {% endblock %}
