@@ -89,18 +89,18 @@
                 
                 <!--start select bank-->
                 <div class="card-body">
-                    <form action="{% url 'register_bank' %}" method="POST">
-                        {% csrf_token %}
+                    <form action="{% url 'register_bank' %}" method="POST">{% csrf_token %}
                         <div class="mb-3">
                             <label for="bankSelect" class="form-label">Banco</label>
                             <select class="form-select" id="bankSelect" name="bank">
                                 <option value="">----</option> <!-- Option for empty selection -->
                                 <!-- Options loaded from BANK_CHOICES -->
-                                {% for choice in account.model.BANK_CHOICES %}
+                                {% for choice in account.BANK_CHOICES %}
                                 <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                                 {% endfor %}
                             </select>
                         </div>
+                        
 
                         <div class="mb-3">
                             <label for="typeSelect" class="form-label">Tipo</label>
@@ -112,6 +112,7 @@
                                 {% endfor %}
                             </select>
                         </div>
+
                         <!--fim select bank-->
 
                         <div class="mb-3">
