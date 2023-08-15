@@ -15,7 +15,7 @@ def financial_index(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    total_balance = sum(account.value for account in page_obj)
+    total_balance = sum(account.value for account in accounts)  # Total de todos os valores
 
     context = {
          'accounts': accounts,
@@ -28,12 +28,19 @@ def financial_index(request):
 
 def manage_financial(request):
     if request.method == "GET":
-        account = Account.objects.all()
+        accounts = Account.objects.all()
         category = Category.objects.all()
 
+        paginator = Paginator(accounts, 3)
+
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+
         context = {
-            "account": account,
-            "category": category
+            "accounts": accounts,
+            "category": category,
+            "page_obj": page_obj
         }
     return render(request, 'financial/manage_financial.html', context)
 
@@ -59,3 +66,11 @@ def register_bank(request):
         messages.add_message(request, constants.SUCCESS, "Banco cadastrado com sucesso")
 
         return redirect('/finantial/manage_financial/')
+
+
+def delete_bank(request, id):
+     bank = Account.objects.get(id=id)
+     bank.delete()
+     messages.add_message(request, constants.SUCCESS, "Banco excluido com sucesso")
+     return redirect('/finantial/manage_financial/')
+
