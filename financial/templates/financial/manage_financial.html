@@ -131,22 +131,25 @@
                 Nova Categoria
             </div>
             <div class="card-body">
-                <form>
+                <form action="{% url 'register_category' %}" method="POST">{% csrf_token %}
                     <div class="mb-3">
                         <label for="categoryInput" class="form-label">Categoria</label>
-                        <input type="text" class="form-control" id="categoryInput">
+                        <input name="category" type="text" class="form-control" id="categoryInput">
                     </div>
                     <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="essentialCheck">
+                        <input name="essential" type="hidden" value="False">
+                        <input name="essential" type="checkbox" class="form-check-input" id="essentialCheck">
                         <label class="form-check-label" for="essentialCheck">Essencial</label>
                     </div>
                     <button type="submit" class="btn btn-primary">Adicionar</button>
                 </form>
             </div>
+            
         </div>
     </div>
 </div>
 <a href="{% url 'financial_index' %}"><button type="button" class="btn btn-light">Voltar</button></a>
+
 <div class="row mt-3">
     <div class="col-md-6">
         <div class="card">
@@ -154,10 +157,15 @@
                 Categorias Cadastradas
             </div>
             <div class="card-body">
+                {% for cat in category %}
                 <ul>
-                    <li>Categoria 1 (Essencial)</li>
-                    <li>Categoria 2</li>
+                    {% if cat.essential %}
+                    <li>{{ cat }} <i class="fa-regular fa-thumbs-up"></i></li>
+                    {% else %}
+                    <li>{{ cat }} <i class="fa-regular fa-thumbs-down"></i></li>
+                    {% endif %}
                 </ul>
+                {% endfor %}
             </div>
         </div>
     </div>

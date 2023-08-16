@@ -74,3 +74,33 @@ def delete_bank(request, id):
      messages.add_message(request, constants.SUCCESS, "Banco excluido com sucesso")
      return redirect('/finantial/manage_financial/')
 
+def register_category(request):
+    if request.method == "GET":
+        return render(request, 'financial/manage_financial.html')  # Certifique-se de passar o nome do template correto
+
+    elif request.method == "POST":
+        category_name = request.POST.get('category')
+        essential_value = request.POST.get('essential')
+        essential = essential_value == 'on'  # Converte para valor booleano
+
+        # TODO: Validações, se necessário
+
+        category = Category(
+            category=category_name,
+            essential=essential
+        )
+
+        category.save()
+
+        messages.success(request, 'Categoria cadastrada com sucesso')  # Use messages.success para mensagens de sucesso
+
+        return redirect('/finantial/manage_financial/')
+    
+'''def update_category(request, id):
+     category = Category.objects.get(id=id)
+
+     category.essential = not category.essential
+
+     category.save()
+
+     return redirect('/finantial/manage_financial/')'''
