@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "dashboard",
     "investments",
     "financial",
+    "extract",
 ]
 
 MIDDLEWARE = [
