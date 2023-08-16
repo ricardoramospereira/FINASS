@@ -98,7 +98,7 @@
                         <select class="form-select" id="bankSelect" name="bank">
                             <option value="">----</option> <!-- Option for empty selection -->
                             <!-- Options loaded from BANK_CHOICES -->
-                            {% for choice in account.model.BANK_CHOICES %}
+                            {% for choice in accounts.model.BANK_CHOICES %}
                                 <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                             {% endfor %}
                         </select>
@@ -110,7 +110,7 @@
                     <select class="form-select" id="typeSelect" name="type">
                         <option value="">----</option> <!-- Option for empty selection -->
                         <!-- Options loaded from ACCOUNT_TYPE -->
-                        {% for choice in account.model.ACCOUNT_TYPE %}
+                        {% for choice in accounts.model.ACCOUNT_TYPE %}
                             <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                         {% endfor %}
                     </select>
