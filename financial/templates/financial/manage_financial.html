@@ -30,33 +30,37 @@
                     {% for account in page_obj %}
                     <div class="account d-flex justify-content-between">
                         <h5>Banco: {{ account.get_bank_display }}</h5>
-                        <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ account.id }}">
+                        <a type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#deleteModal{{ account.id }}">
                             <i class="fas fa-trash-alt"></i>
                         </a>
                     </div>
                     <p>Saldo: R$ {{ account.value }}</p>
 
-                
-                  <!-- Modal de confirmação para exclusão -->
-                  <div class="modal fade" id="deleteModal{{ account.id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ account.id }}" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="deleteModalLabel">Confirmar Exclusão</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+
+                    <!-- Modal de confirmação para exclusão -->
+                    <div class="modal fade" id="deleteModal{{ account.id }}" tabindex="-1"
+                        aria-labelledby="deleteModalLabel{{ account.id }}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel">Confirmar Exclusão</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Fechar"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Tem certeza de que deseja excluir o investimento {{ account.get_bank_display }}?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                                    <a href="{% url 'delete_bank' account.id %}">
+                                        <button type="button" class="btn btn-danger">Excluir</button>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                          Tem certeza de que deseja excluir o investimento {{ account.get_bank_display }}?
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                          <a href="{% url 'delete_bank' account.id %}">
-                            <button type="button" class="btn btn-danger">Excluir</button>
-                          </a>
-                        </div>
-                      </div>
                     </div>
-                  </div>
                     {% endfor %}
 
 
@@ -86,79 +90,77 @@
                 <div class="card-header">
                     Nova Conta
                 </div>
-                
+
                 <!--start select bank-->
                 <div class="card-body">
                     <form action="{% url 'register_bank' %}" method="POST">{% csrf_token %}
-                        <div class="mb-3">
-                            <label for="bankSelect" class="form-label">Banco</label>
-                            <select class="form-select" id="bankSelect" name="bank">
-                                <option value="">----</option> <!-- Option for empty selection -->
-                                <!-- Options loaded from BANK_CHOICES -->
-                                {% for choice in account.BANK_CHOICES %}
+                        <label for="bankSelect" class="form-label">Banco</label>
+                        <select class="form-select" id="bankSelect" name="bank">
+                            <option value="">----</option> <!-- Option for empty selection -->
+                            <!-- Options loaded from BANK_CHOICES -->
+                            {% for choice in account.model.BANK_CHOICES %}
                                 <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        
-
-                        <div class="mb-3">
-                            <label for="typeSelect" class="form-label">Tipo</label>
-                            <select class="form-select" id="typeSelect" name="type">
-                                <option value="">----</option> <!-- Option for empty selection -->
-                                <!-- Options loaded from ACCOUNT_TYPE -->
-                                {% for choice in account.model.ACCOUNT_TYPE %}
-                                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-
-                        <!--fim select bank-->
-
-                        <div class="mb-3">
-                            <label for="valueInput" class="form-label">Valor</label>
-                            <input name="value" type="text" class="form-control" id="valueInput">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Adicionar</button>
-                    </form>
+                            {% endfor %}
+                        </select>
                 </div>
 
+
+                <div class="mb-3">
+                    <label for="typeSelect" class="form-label">Tipo</label>
+                    <select class="form-select" id="typeSelect" name="type">
+                        <option value="">----</option> <!-- Option for empty selection -->
+                        <!-- Options loaded from ACCOUNT_TYPE -->
+                        {% for choice in account.model.ACCOUNT_TYPE %}
+                            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="valueInput" class="form-label">Valor</label>
+                    <input name="value" type="text" class="form-control" id="valueInput">
+                </div>
+                <button type="submit" class="btn btn-primary">Adicionar</button>
+                </form>
             </div>
-            <div class="card mt-3">
-                <div class="card-header">
-                    Nova Categoria
-                </div>
-                <div class="card-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="categoryInput" class="form-label">Categoria</label>
-                            <input type="text" class="form-control" id="categoryInput">
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="essentialCheck">
-                            <label class="form-check-label" for="essentialCheck">Essencial</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Adicionar</button>
-                    </form>
-                </div>
+
+        </div>
+        <div class="card mt-3">
+            <div class="card-header">
+                Nova Categoria
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="categoryInput" class="form-label">Categoria</label>
+                        <input type="text" class="form-control" id="categoryInput">
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="essentialCheck">
+                        <label class="form-check-label" for="essentialCheck">Essencial</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                </form>
             </div>
         </div>
     </div>
-    <a href="{% url 'financial_index' %}"><button type="button" class="btn btn-light">Voltar</button></a>
-    <div class="row mt-3">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    Categorias Cadastradas
-                </div>
-                <div class="card-body">
-                    <ul>
-                        <li>Categoria 1 (Essencial)</li>
-                        <li>Categoria 2</li>
-                    </ul>
-                </div>
+</div>
+<a href="{% url 'financial_index' %}"><button type="button" class="btn btn-light">Voltar</button></a>
+<div class="row mt-3">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Categorias Cadastradas
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li>Categoria 1 (Essencial)</li>
+                    <li>Categoria 2</li>
+                </ul>
             </div>
         </div>
     </div>
+</div>
 </div>
 {% endblock %}
