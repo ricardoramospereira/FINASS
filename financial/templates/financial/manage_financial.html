@@ -99,7 +99,7 @@
                             <option value="">----</option> <!-- Option for empty selection -->
                             <!-- Options loaded from BANK_CHOICES -->
                             {% for choice in accounts.model.BANK_CHOICES %}
-                                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                             {% endfor %}
                         </select>
                 </div>
@@ -111,7 +111,7 @@
                         <option value="">----</option> <!-- Option for empty selection -->
                         <!-- Options loaded from ACCOUNT_TYPE -->
                         {% for choice in accounts.model.ACCOUNT_TYPE %}
-                            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -144,7 +144,7 @@
                     <button type="submit" class="btn btn-primary">Adicionar</button>
                 </form>
             </div>
-            
+
         </div>
     </div>
 </div>
@@ -156,17 +156,23 @@
             <div class="card-header">
                 Categorias Cadastradas
             </div>
+
             <div class="card-body">
                 {% for cat in category %}
                 <ul>
-                    {% if cat.essential %}
-                    <li>{{ cat }} <i class="fa-regular fa-thumbs-up"></i></li>
-                    {% else %}
-                    <li>{{ cat }} <i class="fa-regular fa-thumbs-down"></i></li>
-                    {% endif %}
+                    <li class="list-item">
+                        {{ cat }}
+                        {% if cat.essential %}
+                        (essêncial)
+                        {% endif %}
+                        <a href="{% url 'delete_category' cat.id %}" class="delete-icon"><i class="fa-solid fa-trash-can"></i></a>
+                    </li>
+                    </li>
                 </ul>
                 {% endfor %}
             </div>
+
+
         </div>
     </div>
 </div>
