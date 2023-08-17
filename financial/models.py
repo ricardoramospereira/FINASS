@@ -55,3 +55,9 @@ class Account(models.Model):
 
     def __str__(self) -> str:
         return self.bank
+    
+    def get_full_bank_name(self):
+        for choice in self.BANK_CHOICES:
+            if choice[0] == self.bank:
+                return choice[1]
+        return self.bank  # Retorna a sigla se não encontrada na lista de escolhas

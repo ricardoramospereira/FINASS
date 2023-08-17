@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Account, Category
+from extract.models import Values
 from django.contrib.messages import constants
 from django.contrib import messages
 from django.core.paginator import Paginator, Page
@@ -97,16 +98,24 @@ def register_category(request):
 
         return redirect('/finantial/manage_financial/')
     
-
-def delete_category(request, id):
+##################### parei aqui ######################
+def delete_category(request, category_id):
     try:
-        category = Category.objects.get(id=id)  # Busca a categoria pelo ID
+        category = Category.objects.get(pk=category_id)
+        associated_values = Values.objects.filter(category=category)
+
+        if associated_values.exists():
+            messages.add_message(request, constants.ERROR, "Não é possível excluir a categoria, pois existem valores associados a ela.")
+            return redirect('/finantial/manage_financial/')  # Redireciona de volta à página de listagem de categorias
+
         category.delete()
-        messages.success(request, 'Categoria excluída com sucesso')
+        messages.add_message(request, constants.SUCCESS, "Categoria excluída com sucesso.")
+        return redirect('/finantial/manage_financial/')
+
     except Category.DoesNotExist:
-        messages.error(request, 'Categoria não encontrada')
-    
-    return redirect('/finantial/manage_financial/')  # Redireciona para a página desejada
+        messages.add_message(request, constants.WARNING, "Categoria não encontrada.")
+        return redirect('/finantial/manage_financial/')
+
     
 def update_category(request, id):
      category = Category.objects.get(id=id)
@@ -116,3 +125,5 @@ def update_category(request, id):
      category.save()
 
      return redirect('/finantial/manage_financial/')
+
+
