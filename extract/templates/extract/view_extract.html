@@ -10,7 +10,7 @@
       <div class="form-group">
         <label for="contaSelect">Conta:</label>
         <select name="account" class="form-control" id="contaSelect">
-          <option value="">------------</option>
+          <option value="">Selecione a conta</option>
           {% for account in accounts %}
           <option value="{{ account.id }}">{{ account.get_full_bank_name }}</option>
           {% endfor %}
@@ -20,7 +20,7 @@
       <div class="form-group">
         <label for="categoriaSelect">Categoria:</label>
         <select name="category" class="form-control" id="categoriaSelect">
-          <option value="">------------</option>
+          <option value="">Selecione a categoria</option>
           {% for category in categories %}
           <option value="{{ category.id }}">{{ category }}</option>
           {% endfor %}
@@ -30,6 +30,7 @@
       <div class="form-group">
         <label for="periodoSelect">Período:</label>
         <select name="periodo" class="form-control" id="periodoSelect">
+          <option value="">Selecione o período</option>
           <option value="7">7 dias</option>
           <option value="15">15 dias</option>
           <option value="30">30 dias</option>
