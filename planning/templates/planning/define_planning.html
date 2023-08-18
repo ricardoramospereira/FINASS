@@ -1,6 +1,5 @@
 {% extends 'financial/base_finantial.html' %}
 
-
 {% block 'context' %}
 <div class="container mt-5">
     <h1>Planejamento</h1>
@@ -16,23 +15,48 @@
 
         {% for category in categories %}
         <tr>
-        
           <td>{{ category.category }}</td>
-          <td><input type="number" id='value-category-{{ category.id }}' class="form-control" style="max-width: 100px;" placeholder="0.0" step="0.01" required></td>
+          <td><input value="{{ category.planning_value }}" type="number" id="value-category-{{ category.id }}" class="form-control" style="max-width: 100px;"></td>
           <td class="text-end"><button onclick="update_value_planning_category({{ category.id }})" class="btn btn-primary">Salvar</button></td>
-       
         </tr>
         {% endfor %}
 
       </tbody>
     </table>
     <a href="{% url 'financial_index' %}"><button type="button" class="btn btn-light">Voltar</button></a>
-  </div>
+
+    <!-- Lista para exibir valores salvos -->
+   <h2>Planejamentos Salvos</h2>
+    <ul class="list-group">
+        {% for category in categories %}
+            <li class="list-group-item">
+                <h5 class="mb-1">{{ category.category }}</h5>
+                <p class="mb-1">Valor: {{ category.planning_value }}</p>
+                <small>Data: {{ category.date }}</small>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
 
   <script>
-    function update_value_planning_category(id){
-        value = document.getElementById('value-category-'+id).value
-    }
+     function update_value_planning_category(id){
+            value = document.getElementById('value-category-'+id).value
+            console.log(value)
+
+            fetch("/planning/update_value_category/"+id, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({new_value: value})
+            }).then(function(result){
+                return result.json();
+            }).then(function(data){
+                console.log(data);
+            });
+
+        }
   </script>
+
   
 {% endblock %}

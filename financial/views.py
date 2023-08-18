@@ -92,6 +92,9 @@ def register_category(request):
         if (len(category_name.strip()) ==0 ) or (len(essential_value.strip()) ==0 ):
             messages.add_message(request, constants.ERROR, "Preencha todos os campos")
             return redirect('/finantial/manage_financial/')
+        
+        # Capitalize a primeira letra da categoria
+        category_name = category_name.capitalize()
 
         category = Category(
             category=category_name,
