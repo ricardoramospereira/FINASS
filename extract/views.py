@@ -3,7 +3,7 @@ from financial.models import Category, Account
 from .models import Values
 from django.contrib import messages
 from django.contrib.messages import constants
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # Create your views here.
 def new_value(request):
@@ -60,6 +60,9 @@ def view_extract(request):
         category_get = request.GET.get('category')
         selected_month = request.GET.get('month', datetime.now().month)  # Obtém o mês selecionado do formulário
 
+        # período selecionado pelo usuário
+        selected_period = int(request.GET.get('periodo', 30))  # Padrão para 30 dias
+        start_date = datetime.now() - timedelta(days=selected_period)
         values = Values.objects.filter(date__month=selected_month)
 
         if account_get:
@@ -75,7 +78,8 @@ def view_extract(request):
             'accounts': accounts,
             'categories': categories,
             'values': values,
-            'selected_month': int(selected_month)  # Passa o mês selecionado para o contexto
+            'selected_month': int(selected_month),  # Passa o mês selecionado para o contexto
+            'selected_period': selected_period,
         }
         return render(request, 'extract/view_extract.html', context)
     

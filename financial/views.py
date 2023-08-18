@@ -56,6 +56,9 @@ def register_bank(request):
              value = request.POST.get('value')
 
              #TODO: validações
+             if (len(bank.strip()) ==0 ) or (len(type.strip()) ==0 ) or (len(value.strip()) ==0 ):
+                 messages.add_message(request, constants.ERROR, "Todos os campos devem ser preenchidos")
+                 return redirect('/finantial/manage_financial/')
 
         account = Account(
              bank = bank,
