@@ -1,0 +1,44 @@
+{% extends 'financial/base_finantial.html' %}
+
+
+{% block 'context' %}
+    <div class="container mt-5">
+        <h1>Extrato Bancário</h1>
+        <table class="table table-striped">
+        <thead>
+            <tr>
+            <th scope="col">Conta</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Data</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            {% for value in values %}
+            <td>{{ value.account.get_full_bank_name }}</td>
+            <td>{{ value.category }}</td>
+            <td>{{ value.date }}</td>
+            <td>
+                {% if value.type == 'S' %}
+                <i class="fa-solid fa-arrow-down red-arrow"></i>
+                {% else %}
+                <i class="fa-solid fa-arrow-up green-arrow"></i>
+                {% endif %}
+            </td>
+            <td>R$ {{ value.value }}</td>
+            </tr>
+            <tr>
+            <td>987654321</td>
+            <td>Transporte</td>
+            <td>2023-08-17</td>
+            <td>Crédito</td>
+            <td>R$ 200,00</td>
+            {% endfor %}
+            </tr>
+            <!-- Adicione mais linhas aqui conforme necessário -->
+        </tbody>
+        </table>
+    </div>
+{% endblock %}

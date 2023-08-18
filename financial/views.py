@@ -89,6 +89,9 @@ def register_category(request):
         essential = essential_value == 'on'  # Converte para valor booleano
 
         # TODO: Validações
+        if (len(category_name.strip()) ==0 ) or (len(essential_value.strip()) ==0 ):
+            messages.add_message(request, constants.ERROR, "Preencha todos os campos")
+            return redirect('/finantial/manage_financial/')
 
         category = Category(
             category=category_name,

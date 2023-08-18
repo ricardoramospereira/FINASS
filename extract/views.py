@@ -3,7 +3,13 @@ from financial.models import Category, Account
 from .models import Values
 from django.contrib import messages
 from django.contrib.messages import constants
-from datetime import datetime, timedelta
+from datetime import datetime #timedelta
+'''import os
+from django.template.loader import render_to_string
+from django.conf import settings
+from weasyprint import HTML
+from io import BytesIO #Salve in memory
+from django.http import FileResponse'''
 
 # Create your views here.
 def new_value(request):
@@ -25,6 +31,9 @@ def new_value(request):
         type = request.POST.get('type')
 
         #TODO: Validations
+        if(len(value.strip()) == 0) or (len(category.strip()) == 0) or (len(description.strip()) == 0) or (len(account.strip()) == 0) or (len(date.strip()) == 0) or (len(type.strip()) == 0):
+            messages.add_message(request, constants.ERROR, "Preencha todos os campos")
+            return redirect('/extract/new_value')
 
         values = Values(
             value=value,
@@ -79,3 +88,20 @@ def view_extract(request):
         }
         return render(request, 'extract/view_extract.html', context)
     
+'''
+def export_extract(request):
+    values = Values.objects.filter(date__month=datetime.now().month)
+    accounts = Account.objects.all()
+    categories = Category.objects.all()
+    
+    path_template = os.path.join(settings.BASE_DIR, 'extract/templates/extract/export_extract.html') 
+    path_output = BytesIO()
+
+    template_render = render_to_string(path_template, {'values': values, 'accounts': accounts, 'categories': categories})
+    HTML(string=template_render).write_pdf(path_output)
+
+    path_output.seek(0)
+    
+
+    return FileResponse(path_output, filename="extrato.pdf")
+'''

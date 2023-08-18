@@ -26,5 +26,6 @@ urlpatterns = [
     path("", include('dashboard.urls')),
     path("finantial/", include('financial.urls')),
     path("extract/", include('extract.urls')),
+    path("planning/", include('planning.urls'))
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

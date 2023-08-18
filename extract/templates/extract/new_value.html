@@ -18,11 +18,11 @@
     <form action="{% url 'new_value' %}" method="POST">{% csrf_token %}
         <div class="mb-3">
             <label for="valor" class="form-label">Valor</label>
-            <input type="text" class="form-control" id="valor" name="value" required>
+            <input type="text" class="form-control" id="valor" name="value">
         </div>
         <div class="mb-3">
             <label for="categoria" class="form-label">Categoria</label>
-            <select class="form-select" id="categoria" name="category" required>
+            <select class="form-select" id="categoria" name="category">
                  <option value="">Selecione uma categoria</option>
                 {% for category in categories %}
                 <option value="{{category.id}}">{{ category }}</option>
@@ -35,11 +35,11 @@
         </div>
         <div class="mb-3">
             <label for="data" class="form-label">Data</label>
-            <input type="date" class="form-control" id="data" name="date" required>
+            <input type="date" class="form-control" id="data" name="date">
         </div>
         <div class="mb-3">
             <label for="conta" class="form-label">Conta</label>
-            <select class="form-select" id="conta" name="account" required>
+            <select class="form-select" id="conta" name="account">
                 <option value="">Selecione uma conta</option>
                 {% for account in accounts %}
                     {% for choice in account.BANK_CHOICES %}
@@ -54,11 +54,11 @@
         <div class="mb-3">
             <label class="form-check-label">Tipo</label>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="type" id="entrada" value="E" required>
+                <input class="form-check-input" type="radio" name="type" id="entrada" value="E">
                 <label class="form-check-label" for="entrada">Entrada</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="type" id="saida" value="S" required>
+                <input class="form-check-input" type="radio" name="type" id="saida" value="S">
                 <label class="form-check-label" for="saida">Saída</label>
             </div>
         </div>
