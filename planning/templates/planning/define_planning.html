@@ -3,6 +3,16 @@
 {% block 'context' %}
 <div class="container mt-5">
     <h1>Planejamento</h1>
+    {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Importante: {% endif %}
+                    {{ message }}
+                    </li>
+                    {% endfor %}
+            </ul>
+            {% endif %}
     <table class="table">
       <thead>
         <tr>
@@ -23,7 +33,7 @@
 
       </tbody>
     </table>
-    <a href="{% url 'financial_index' %}"><button type="button" class="btn btn-light">Voltar</button></a>
+    
 
     <!-- Lista para exibir valores salvos -->
    <h2>Planejamentos Salvos</h2>
@@ -36,6 +46,7 @@
             </li>
         {% endfor %}
     </ul>
+    <a href="{% url 'financial_index' %}"><button type="button" class="btn btn-light">Voltar</button></a>
 </div>
 
   <script>

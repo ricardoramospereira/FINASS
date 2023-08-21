@@ -4,6 +4,8 @@ from financial.models import Category
 # tirar o csrf token, devido ao javascript
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.contrib import messages
+from django.contrib.messages import constants
 
 # Create your views here.
 def define_planning(request):
