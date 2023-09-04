@@ -79,7 +79,7 @@ def delete_bank(request, id):
         bank = Account.objects.get(id=id)
         
         # Adicione sua lógica de verificação aqui. Por exemplo, verificar se o banco tem transações associadas.
-        associated_values = Values.objects.filter(account=bank)  # substitua isso pela sua lógica real
+        associated_values = Values.objects.filter(account=bank)
 
         if associated_values.exists():
             messages.add_message(request, constants.ERROR, "Não é possível excluir o banco, pois existem transações associadas a ele.")
