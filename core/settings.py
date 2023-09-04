@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "financial",
     "extract",
     "planning",
+    "accounts"
 ]
 
 MIDDLEWARE = [
