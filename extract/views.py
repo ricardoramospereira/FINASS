@@ -3,7 +3,7 @@ from financial.models import Category, Account
 from .models import Values
 from django.contrib import messages
 from django.contrib.messages import constants
-from datetime import datetime #timedelta
+from datetime import datetime, timedelta 
 '''import os
 from django.template.loader import render_to_string
 from django.conf import settings
@@ -68,8 +68,18 @@ def view_extract(request):
         account_get = request.GET.get('account')
         category_get = request.GET.get('category')
         selected_month = request.GET.get('month', datetime.now().month)  # Obtém o mês selecionado do formulário
+        day_range = request.GET.get('day_range') # Obtém o intervalo de dias selecionado do formulário
+
+        # Converta a string para um número inteiro (por padrão, os valores GET são strings)
+        if day_range:
+            day_range = int(day_range)
      
         values = Values.objects.filter(date__month=selected_month)
+
+         # Se day_range estiver definido, use-o para filtrar os registros
+        if day_range:
+            target_date = datetime.now() - timedelta(days=day_range)
+            values = values.filter(date__gte=target_date)
 
         if account_get:
             values = values.filter(account__id=account_get)

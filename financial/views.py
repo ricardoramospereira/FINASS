@@ -10,6 +10,8 @@ from django.core.paginator import Paginator, Page
 # Create your views here.
 def financial_index(request):
     accounts = Account.objects.all()
+    categories = Category.objects.all()
+
 
     paginator = Paginator(accounts, 3)
 
@@ -19,6 +21,7 @@ def financial_index(request):
     total_balance = sum(account.value for account in accounts)  # Total de todos os valores
 
     context = {
+         'categories': categories,
          'accounts': accounts,
          'total_balance': total_balance,
          'page_obj': page_obj
@@ -71,12 +74,26 @@ def register_bank(request):
 
         return redirect('/finantial/manage_financial/')
 
-
 def delete_bank(request, id):
-     bank = Account.objects.get(id=id)
-     bank.delete()
-     messages.add_message(request, constants.SUCCESS, "Banco excluido com sucesso")
-     return redirect('/finantial/manage_financial/')
+    try:
+        bank = Account.objects.get(id=id)
+        
+        # Adicione sua lógica de verificação aqui. Por exemplo, verificar se o banco tem transações associadas.
+        associated_values = Values.objects.filter(account=bank)  # substitua isso pela sua lógica real
+
+        if associated_values.exists():
+            messages.add_message(request, constants.ERROR, "Não é possível excluir o banco, pois existem transações associadas a ele.")
+            return redirect('/finantial/manage_financial/')
+        
+        bank.delete()
+        messages.add_message(request, constants.SUCCESS, "Banco excluído com sucesso.")
+        
+    except Account.DoesNotExist:
+        messages.add_message(request, constants.WARNING, "Banco não encontrado.")
+        
+    return redirect('/finantial/manage_financial/')
+
+    
 
 
 def register_category(request):

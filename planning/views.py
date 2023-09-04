@@ -25,3 +25,4 @@ def update_value_category(request, id):
     category.save()
 
     return JsonResponse({'status': 'Sucesso'})
+

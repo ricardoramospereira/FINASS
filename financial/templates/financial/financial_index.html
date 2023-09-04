@@ -101,7 +101,7 @@
             <p><strong>Próximas do Vencimento:</strong> 3 contas</p>
             <p style="color: red;"><strong>Vencidas:</strong> 2 contas</p>
           </div>
-          <button class="btn btn-primary">Ver Mais</button>
+          <a href="{% url 'accounts' %}"><button type="submit" class="btn btn-primary">Ver mais</button></a>
         </div>
       </div>
     </div>
@@ -112,15 +112,20 @@
           <h5 class="card-title">Equilíbrio Financeiro</h5>
           <i class="fa-solid fa-scale-balanced"></i>
           <br>
-          Essênciais
-          <div class="progress">
+          <br>
+          
+          {% for category in categories %}
+          <p>{{ category }}</p>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: {{category.calculate_percentage_spend_by_category}}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">{{category.calculate_percentage_spend_by_category}}%</div>
+            </div>
+          {% endfor %}
+  
+        
+         
+          <!--<div class="progress">
             <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="75"
-              aria-valuemin="0" aria-valuemax="100">75%</div>
-          </div>
-          Não Essênciais
-          <div class="progress">
-            <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="75"
-              aria-valuemin="0" aria-valuemax="100">75%</div>
+              aria-valuemin="0" aria-valuemax="100">75%</div>-->
           </div>
         </div>
       </div>

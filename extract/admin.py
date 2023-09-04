@@ -4,4 +4,4 @@ from.models import Values
 # Register your models here.
 @admin.register(Values)
 class ValuesAdmin(admin.ModelAdmin):
-    list_display = ("description",)
+    list_display = ("description", "value", "category")

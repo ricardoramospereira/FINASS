@@ -1,0 +1,72 @@
+{% extends 'financial/base_finantial.html' %} {% block 'context' %}
+<div class="container mt-5">
+  <h2>Adicionar contas</h2>
+
+  <form action="#" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="tituloInput">Título</label>
+      <input
+        type="text"
+        class="form-control"
+        id="tituloInput"
+        name="titulo"
+        placeholder="Informe o título"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="categoriaSelect">Categoria</label>
+      <select class="form-control" id="categoriaSelect" name="categoria">
+        <option value="">Selecione uma categoria</option>
+        {% for category in categories %}
+        <option value="{{ category.id }}">{{ category }}</option>
+        {% endfor %}
+
+        <!-- outras opções aqui -->
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="descricaoInput">Descrição</label>
+      <textarea
+        class="form-control"
+        id="descricaoInput"
+        name="descricao"
+        rows="3"
+        placeholder="Descreva o item"
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="valorInput">Valor</label>
+      <input
+        type="number"
+        step="0.01"
+        class="form-control"
+        id="valorInput"
+        name="valor"
+        placeholder="Informe o valor"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="vencimentoInput">Dia de Vencimento</label>
+      <input
+        type="date"
+        class="form-control"
+        id="vencimentoInput"
+        name="vencimento"
+      />
+    </div>
+    <br />
+
+    <a href="#"
+      ><button type="submit" class="btn btn-primary">Salvar</button></a
+    >
+    <a href="{% url 'financial_index' %}"
+      ><button type="button" class="btn btn-light">Voltar</button></a
+    >
+  </form>
+</div>
+{% endblock %}
