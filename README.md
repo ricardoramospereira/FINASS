@@ -1,38 +1,39 @@
-# Sistema de Controle Financeiro
+# Financial Control System
 
 ## Status
 
-🚧 Este projeto ainda está em desenvolvimento 🚧
+🚧 This project is still under development 🚧
 
-## Sobre o Projeto
+## About the Project
 
-Este é um sistema de controle financeiro construído com o objetivo de ajudar usuários na gestão de suas finanças pessoais ou empresariais. O sistema oferece uma variedade de funcionalidades para tornar mais eficiente a organização financeira do usuário. Entre as principais funcionalidades estão:
+This is a financial control system built with the goal of aiding users in the management of their personal or business finances. The system offers a range of features to make the financial organization of the user more efficient. The key functionalities include:
 
-- **Cadastro de Bancos e Saldos**: Mantenha um registro dos seus bancos e dos saldos em cada um deles.
-- **Contas a Pagar e a Receber**: Cadastre e gerencie todas as suas contas a pagar e a receber.
-- **Extrato Financeiro**: Acompanhe todas as suas movimentações financeiras em um só lugar.
-- **Campo de Investimento**: Gerencie seus investimentos e acompanhe sua rentabilidade.
-- **Autenticação de Usuário**: Sistema com login e autenticação de usuários, permitindo que cada usuário acesse apenas seus próprios dados.
+- **Bank and Balance Registration**: Keep track of your banks and the balances in each.
+- **Accounts Payable and Receivable**: Register and manage all your payable and receivable accounts.
+- **Financial Statement**: Track all your financial movements in one place.
+- **Investment Field**: Manage your investments and track their profitability.
+- **User Authentication**: The system comes with user login and authentication, allowing each user to only access their own data.
 
-## Tecnologias Utilizadas
+## Technologies Used
 
-O projeto foi desenvolvido utilizando as seguintes tecnologias:
+The project was developed using the following technologies:
 
-- **Python (Django)**: Backend do projeto
-- **Bootstrap**: Framework CSS para design responsivo
-- **HTML**: Estrutura básica do site
-- **JavaScript**: Funcionalidades interativas no frontend
+- **Python (Django)**: Backend of the project
+- **Bootstrap**: CSS framework for responsive design
+- **HTML**: Basic structure of the site
+- **JavaScript**: Interactive functionalities on the frontend
 
-## Como Contribuir
+## How to Contribute
 
-Para contribuir com este projeto, siga os passos abaixo:
+To contribute to this project, please follow the steps below:
 
-1. Faça um fork deste repositório.
-2. Crie uma nova branch com as suas alterações: `git checkout -b minha-alteracao`
-3. Salve as alterações e crie uma mensagem de commit contando o que você fez: `git commit -m "Adicionada funcionalidade X"`
-4. Envie as suas alterações: `git push origin minha-alteracao`
+1. Fork this repository.
+2. Create a new branch with your changes: `git checkout -b my-changes`
+3. Save your changes and create a commit message describing what you did: `git commit -m "Added feature X"`
+4. Push your changes: `git push origin my-changes`
 
-## Licença
 
-[Informe a licença aqui, se aplicável]
+
+
+
 
