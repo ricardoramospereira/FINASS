@@ -11,10 +11,17 @@ class Bill_to_pay(models.Model):
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
     description = models.TextField('Descrição')
     value = models.FloatField('Valor')
-    bill_day = models.IntegerField('Dia do pagamento')
+    bill_day = models.DateField('Dia do pagamento')
 
 
     def __str__(self) -> str:
         return self.title
 
+class PaidBills(models.Model):
+    class Meta:
+        verbose_name = 'Conta paga'
+        verbose_name_plural = 'Contas pagas'
+        
+    account = models.ForeignKey(Bill_to_pay, on_delete=models.DO_NOTHING)
+    date_bill = models.DateField()
     

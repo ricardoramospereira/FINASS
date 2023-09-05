@@ -1,8 +1,17 @@
 {% extends 'financial/base_finantial.html' %} {% block 'context' %}
 <div class="container mt-5">
   <h2>Adicionar contas</h2>
-
-  <form action="#" method="POST">
+              {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Importante: {% endif %}
+                        {{ message }}
+                        </li>
+                        {% endfor %}
+                </ul>
+              {% endif %}
+  <form action="{% url 'accounts' %}" method="POST">
     {% csrf_token %}
     <div class="form-group">
       <label for="tituloInput">Título</label>
@@ -10,14 +19,14 @@
         type="text"
         class="form-control"
         id="tituloInput"
-        name="titulo"
+        name="title"
         placeholder="Informe o título"
       />
     </div>
 
     <div class="form-group">
       <label for="categoriaSelect">Categoria</label>
-      <select class="form-control" id="categoriaSelect" name="categoria">
+      <select class="form-control" id="categoriaSelect" name="category">
         <option value="">Selecione uma categoria</option>
         {% for category in categories %}
         <option value="{{ category.id }}">{{ category }}</option>
@@ -32,7 +41,7 @@
       <textarea
         class="form-control"
         id="descricaoInput"
-        name="descricao"
+        name="description"
         rows="3"
         placeholder="Descreva o item"
       ></textarea>
@@ -45,7 +54,7 @@
         step="0.01"
         class="form-control"
         id="valorInput"
-        name="valor"
+        name="value"
         placeholder="Informe o valor"
       />
     </div>
@@ -56,7 +65,7 @@
         type="date"
         class="form-control"
         id="vencimentoInput"
-        name="vencimento"
+        name="bill_day"
       />
     </div>
     <br />
