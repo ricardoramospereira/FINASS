@@ -26,7 +26,7 @@ def custom_404(request, exception):
     return render(request, 'error/404_http.html', status=404)
 
 def custom_500(request):
-    return render(request, 'error/404_http.html', status=500)
+    return render(request, 'error/500_http.html', status=500)
 
 handler404 = custom_404
 handler500 = custom_500
