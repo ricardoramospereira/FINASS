@@ -19,6 +19,19 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from django.conf.urls import handler404, handler500
+from django.shortcuts import render
+
+def custom_404(request, exception):
+    return render(request, 'error/404_http.html', status=404)
+
+def custom_500(request):
+    return render(request, 'error/404_http.html', status=500)
+
+handler404 = custom_404
+handler500 = custom_500
+
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("auth/", include('users.urls')),
@@ -27,6 +40,9 @@ urlpatterns = [
     path("finantial/", include('financial.urls')),
     path("extract/", include('extract.urls')),
     path("planning/", include('planning.urls')),
-    path("accounts/", include('accounts.urls'))
+    path("accounts/", include('accounts.urls')),
+
+    
+    
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,15 @@
+{% extends 'financial/base_finantial.html' %}
+
+
+{% block 'context' %}
+     <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <h1 class="display-4">Erro 500</h1>
+                <p class="lead">Desculpe, algo deu errado no servidor.</p>
+                <p>Por favor, tente novamente mais tarde.</p>
+                <a href="{% url 'index' %}" class="btn btn-primary">Página Inicial</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
