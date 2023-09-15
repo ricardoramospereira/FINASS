@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from financial.models import Category
-from .models import Bill_to_pay
+from .models import Bill_to_pay, PaidBills
 from django.contrib.messages import constants
 from django.contrib import messages
+from datetime import datetime
 
 # Create your views here.
 def accounts(request):
@@ -46,4 +47,12 @@ def accounts(request):
 
 
 def see_accounts(request):
-    return render(request, 'accounts/see_accounts.html')
+    current_date = datetime.now().date()
+
+    # Obter IDs de contas pagas no mês atual
+    paid_account_ids = PaidBills.objects.filter(date_bill__month=current_date.month).values_list('account_id', flat=True)
+
+    # Obter contas que estão vencidas e não foram pagas
+    overdue_account = Bill_to_pay.objects.filter(bill_day__lt=current_date).exclude(id__in=paid_account_ids)
+
+    return render(request, 'accounts/see_accounts.html', {'overdue_account': overdue_account})

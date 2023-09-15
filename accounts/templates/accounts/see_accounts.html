@@ -1,1 +1,94 @@
-<h1>See accounts</h1>
+{% extends 'financial/base_finantial.html' %}
+
+{% block 'context' %}
+   <div class="container mt-5">
+    <div class="row">
+
+        <!-- Contas Vencidas Card -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <span class="text-danger">Contas Vencidas</span>
+                </div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                    
+                        <th>Nome</th>
+                        <th>Data</th>
+                        <th>Ação</th>
+                  
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Exemplo de uma conta -->
+                    <tr>
+                    {% for overdue in overdue_account%}
+                        <td>{{ overdue }}</td>
+                        <td>{{ overdue.bill_day }}</td>
+                        <td><button class="btn btn-primary btn-sm">Pagar</button></td>
+                    {% endfor %}
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Contas Próximas do Vencimento Card -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Contas Próximas do Vencimento
+                </div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Data</th>
+                        <th>Ação</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Exemplo de uma conta -->
+                    <tr>
+                        <td>Conta 2</td>
+                        <td>10/01/2023</td>
+                        <td><button class="btn btn-primary btn-sm">Pagar</button></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Restantes Card -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Restantes
+                </div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Data</th>
+                        <th>Ação</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Exemplo de uma conta -->
+                    <tr>
+                        <td>Conta 3</td>
+                        <td>20/01/2023</td>
+                        <td><button class="btn btn-primary btn-sm">Pagar</button></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
